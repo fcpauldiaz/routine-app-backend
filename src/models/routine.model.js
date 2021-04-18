@@ -12,7 +12,7 @@ const routineSchema = mongoose.Schema(
     tasks: [
       {
         type: { type: String },
-        time: { type: Date },
+        time: { type: String },
       },
     ],
     user: {
