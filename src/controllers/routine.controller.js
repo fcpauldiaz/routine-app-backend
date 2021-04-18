@@ -25,8 +25,17 @@ const deleteRoutine = catchAsync(async (req, res) => {
   throw new ApiError(httpStatus.NOT_FOUND, 'Routine not found');
 });
 
+const deleteTask = catchAsync(async (req, res) => {
+  const result = await routineService.deleteTask(req.params.routineId, req.params.taskId);
+  if (result.ok === 1) {
+    return res.sendStatus(httpStatus.OK);
+  }
+  throw new ApiError(httpStatus.NOT_FOUND, 'Routine not found');
+});
+
 module.exports = {
   createRoutine,
   getRoutines,
   deleteRoutine,
+  deleteTask
 };

@@ -8,6 +8,14 @@ const createRoutine = {
   }),
 };
 
+const deleteTask = {
+  params: Joi.object().keys({
+    routineId: Joi.string().required(),
+    taskId: Joi.string().required()
+  }),
+};
+
 module.exports = {
   createRoutine,
+  deleteTask
 };

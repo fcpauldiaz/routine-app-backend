@@ -1,5 +1,6 @@
 const httpStatus = require('http-status');
 const { Routine } = require('../models');
+const { ObjectId } = require('mongodb');
 const ApiError = require('../utils/ApiError');
 
 /**
@@ -36,8 +37,24 @@ const deleteRoutine = async (routineId) => {
   return result;
 }
 
+/**
+ * Delete Task
+ * @param {String} routineId
+ * @param {String} taskId
+ * @returns {Promise<Routine>}
+ */
+
+const deleteTask = async (routineId, taskId) => {
+  console.log(routineId, taskId);
+  const result = await Routine.updateOne({ _id: routineId },
+  { $pull: { tasks: { _id: ObjectId(taskId) } } }).exec();
+  return result;
+}
+
+
 module.exports = {
   createRoutine,
   getRoutinesByUser,
   deleteRoutine,
+  deleteTask
 };
