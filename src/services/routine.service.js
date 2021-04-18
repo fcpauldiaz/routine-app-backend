@@ -45,10 +45,22 @@ const deleteRoutine = async (routineId) => {
  */
 
 const deleteTask = async (routineId, taskId) => {
-  console.log(routineId, taskId);
   const result = await Routine.updateOne({ _id: routineId },
   { $pull: { tasks: { _id: ObjectId(taskId) } } }).exec();
   return result;
+}
+
+/**
+ * Add Task
+ * @param {String} routineId
+ * @returns {Promise<Routine>}
+ */
+
+const updateRoutine = async (routineId, routineBody) => {
+  let result = await Routine.findOne({ _id: routineId });
+  result.name = routineBody.name;
+  result.tasks = routineBody.tasks;
+  return await result.save();
 }
 
 
@@ -56,5 +68,6 @@ module.exports = {
   createRoutine,
   getRoutinesByUser,
   deleteRoutine,
-  deleteTask
+  deleteTask,
+  updateRoutine
 };

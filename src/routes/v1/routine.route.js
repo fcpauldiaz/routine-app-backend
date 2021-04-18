@@ -22,4 +22,8 @@ router
   .route('/:routineId/task/:taskId')
   .delete(auth(), validate(routineValidation.deleteTask), routineController.deleteTask);
 
+router
+  .route('/:routineId/task')
+  .post(auth(), routineController.updateRoutine);
+
 module.exports = router;
