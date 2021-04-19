@@ -47,7 +47,7 @@ passport.use('jwt', jwtStrategy);
 // v1 api routes
 app.use('/v1', routes);
 
-app.use('/', httpStatus.OK);
+app.use('/', (req, res) => res.sendStatus(httpStatus.OK));
 
 // send back a 404 error for any unknown api request
 app.use((req, res, next) => {
